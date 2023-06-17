@@ -1,0 +1,16 @@
+we ouselves have to add type as module to tell json we are using the latest syntax
+
+devdependencies vs dependencies
+
+devdependencies production pr push ni hoti 
+while deploying nodemon not required
+
+use newparser
+async
+
+rout api ka endpoint hota hai
+
+axios interceptors
+
+react ko unik key chaiye hoti hai map category.id se error hat ta hai
+grid se responsive design banta hai
