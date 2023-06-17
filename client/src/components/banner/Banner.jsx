@@ -26,7 +26,7 @@ const banner=()=>{
     
         <Image>
             <Heading>BLOG</Heading>
-            <SubHeading>SOMETHING</SubHeading>
+            <SubHeading>EVERYTHING</SubHeading>
         </Image>
 
 

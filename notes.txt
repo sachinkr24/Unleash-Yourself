@@ -14,3 +14,5 @@ axios interceptors
 
 react ko unik key chaiye hoti hai map category.id se error hat ta hai
 grid se responsive design banta hai
+
+useEffect 2nd hook first was useState

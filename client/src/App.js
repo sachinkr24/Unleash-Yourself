@@ -1,13 +1,15 @@
 // import logo from './logo.svg';
 import './App.css';
 //components
-
+import CreatePost from './create/CreatePost';
 import Login from './components/account/Login';
 import DataProvider from './context/DataProvider';
 import Home from './components/home/Home';
 import Header from './components/header/Header';
 import {BrowserRouter, Routes, Route , Outlet , Navigate} from 'react-router-dom';
 import { useState } from 'react';
+
+
 function App() {
  const PrivateRoute = ({ isAuthenticated ,...props }) =>{
   return isAuthenticated?
@@ -26,9 +28,16 @@ function App() {
       <Routes>
 
       <Route path = '/login' element={<Login isUserAuthenticated={isUserAuthenticated} /> }/>
+
       <Route path = '/' element = {<PrivateRoute isAuthenticated ={isAuthenticated} />} >
-      <Route path = '/' element={<Home/>}/>
+        <Route path = '/' element={<Home/>}/>
       </Route>
+
+      <Route path = '/create' element = {<PrivateRoute isAuthenticated ={isAuthenticated} />} >
+        <Route path = '/create' element={<CreatePost/>}/>
+      </Route>
+
+
       </Routes>
 
       </div>

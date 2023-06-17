@@ -1,5 +1,6 @@
 import { Button, Table ,TableBody, TableCell, TableHead, TableRow, styled } from "@mui/material";
 import { categories } from "../../constants/data";
+import { Link } from "react-router-dom";
 
 const StyledTable = styled(Table)`
 
@@ -15,12 +16,16 @@ background:#6495ED;
 const Categories = () => {
     return(
         <>
+        <Link to={`/create`} style={{textDecoration:'none'}}>
         <StyledButton variant="contained">Create Blog</StyledButton>
+        </Link>
         <StyledTable>
             <TableHead>
                 <TableRow>
                     <TableCell>
-                        All Categories
+                        <Link to='/'>
+                         All Categories
+                        </Link>
                     </TableCell>
                 </TableRow>
             </TableHead>
@@ -29,7 +34,9 @@ const Categories = () => {
                     categories.map(category=>(
                     <TableRow key = {category.id}>
                     <TableCell>
+                        <Link to = {`/?category=${category.type}`}>
                         {category.type}
+                        </Link>
                     </TableCell>
                    </TableRow>
                     ))
