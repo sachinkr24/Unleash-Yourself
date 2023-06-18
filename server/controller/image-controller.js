@@ -2,12 +2,14 @@ import grid from 'gridfs-stream';
 import mongoose from 'mongoose';
 
 const url = 'http://localhost:8000';
-
+//files uploaded as chunks in mongodb(binary file)
 
 let gfs, gridfsBucket;
 const conn = mongoose.connection;
+//checking connection weather it's stablised or not
 conn.once('open', () => {
     gridfsBucket = new mongoose.mongo.GridFSBucket(conn.db, {
+      //streaming chunk file
         bucketName: 'fs'
     });
     gfs = grid(conn.db, mongoose.mongo);
@@ -29,7 +31,7 @@ export const getImage = async (request, response) => {
         const file = await gfs.files.findOne({ filename: request.params.filename });
         // const readStream = gfs.createReadStream(file.filename);
         // readStream.pipe(response);
-        const readStream = gridfsBucket.openDownloadStream(file._id);
+        const readStream = gridfsBucket.openDownloadStream(file._id);//to download the photo
         readStream.pipe(response);
     } catch (error) {
         response.status(500).json({ msg: error.message });
