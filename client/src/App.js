@@ -13,12 +13,13 @@ import { useState } from 'react';
 function App() {
  const PrivateRoute = ({ isAuthenticate ,...props }) =>{
   const token =sessionStorage.getItem('accessToken');
-  return isAuthenticated &&token?
+ 
+  return isAuthenticated  &&token?
   <>
   <Header/>
   <Outlet/>
   </>
-  : <Navigate replace to = '/account' />
+  : <Navigate replace to = '/Login' />
  }
   const[isAuthenticated,isUserAuthenticated] = useState(false);
   return (
@@ -28,7 +29,7 @@ function App() {
       <div style={{marginTop:64}}>
       <Routes>
 
-      <Route path='/account' element={<Login isUserAuthenticated={isUserAuthenticated} />} />
+      <Route path='/Login' element={<Login isUserAuthenticated={isUserAuthenticated} />} />
       <Route path='/' element={<PrivateRoute isAuthenticated={isAuthenticated} />} >
               <Route path='/' element={<Home />} />
              </Route>
