@@ -1,6 +1,6 @@
 import express from 'express';
 
-import { signupUser } from '../controller/user-controller.js';
+
 
 import { createPost,   getPost, getAllPosts, updatePost, deletePost } from '../controller/post-controller.js';
 import { uploadImage, getImage } from '../controller/image-controller.js';
@@ -12,11 +12,10 @@ import upload from '../utils/upload.js';
 
 const router = express.Router();
 
-router.post('/signup', signupUser);
+router.post('/signup',singupUser);
 router.post('/login', loginUser);
-
-router.post('/signup', singupUser);
 router.post('/logout', logoutUser);
+
 
 router.post('/token', createNewToken);
 
