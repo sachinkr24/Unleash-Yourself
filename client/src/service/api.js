@@ -1,7 +1,6 @@
 import axios from 'axios'; 
 import{API_NOTIFICATION_MESSAGES} from '../constants/config.js' ;
 import {SERVICE_URLS} from '../constants/config.js' ;
-import { getAccessToken, getRefreshToken, setAccessToken, getType } from '../utils/common-utils';
 const API_URL = 'http://localhost:8000';
 
 const axiosInstance = axios.create({
@@ -14,15 +13,8 @@ const axiosInstance = axios.create({
 //will help in creating common api
 axiosInstance.interceptors.request.use(
     function (config){
-        if (config.TYPE.params) {
-            config.params = config.TYPE.params
-        } else if (config.TYPE.query) {
-            config.url = config.url + '/' + config.TYPE.query;
-        }
         return config;
-            
-        },
-       
+    },
     function(error){
         return Promise.reject(error);
     }
@@ -100,12 +92,8 @@ for(const [key,value] of Object.entries(SERVICE_URLS)){
         axiosInstance({
             method: value.method,
             url: value.url,
-            data:body,
+            data:value.method==='DELETE'?{} : body,
             responseType:value.responseType,
-            headers: {
-                authorization: getAccessToken(),
-            }, 
-            TYPE: getType(value, body),
             onUploadProgress: function(progressEvent){
                 if(showUploadProgress){
                     let percentageCompleted =Math.round((progressEvent.loaded*100)/ProgressEvent.total)

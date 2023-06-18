@@ -2,6 +2,7 @@
 import './App.css';
 //components
 import CreatePost from './components/create/CreatePost';
+import Update from './components/create/Update';
 import Login from './components/account/Login';
 import DataProvider from './context/DataProvider';
 import Home from './components/home/Home';
@@ -36,8 +37,11 @@ function App() {
               <Route path='/create' element={<CreatePost />} />
              </Route>
 
-             <Route path='/details/:id' element={<PrivateRoute isAuthenticated={isAuthenticated} />} >
+      <Route path='/details/:id' element={<PrivateRoute isAuthenticated={isAuthenticated} />} >
               <Route path='/details/:id' element={<DetailView />} />
+            </Route>
+      <Route path='/update/:id' element={<PrivateRoute isAuthenticated={isAuthenticated} />} >
+              <Route path='/update/:id' element={<Update />} />
             </Route>
 
             </Routes>
