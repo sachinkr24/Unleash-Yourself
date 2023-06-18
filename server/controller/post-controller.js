@@ -13,33 +13,9 @@ export const createPost = async (request, response) => {
     }
 }
 
-export const updatePost = async (request, response) => {
-    try {
-        const post = await Post.findById(request.params.id);
 
-        if (!post) {
-            response.status(404).json({ msg: 'Post not found' })
-        }
-        
-        await Post.findByIdAndUpdate( request.params.id, { $set: request.body })
 
-        response.status(200).json('post updated successfully');
-    } catch (error) {
-        response.status(500).json(error);
-    }
-}
 
-export const deletePost = async (request, response) => {
-    try {
-        const post = await Post.findById(request.params.id);
-        
-        await post.delete()
-
-        response.status(200).json('post deleted successfully');
-    } catch (error) {
-        response.status(500).json(error)
-    }
-}
 
 export const getPost = async (request, response) => {
     try {
@@ -50,6 +26,7 @@ export const getPost = async (request, response) => {
         response.status(500).json(error)
     }
 }
+
 
 export const getAllPosts = async (request, response) => {
     let username = request.query.username;
@@ -67,4 +44,6 @@ export const getAllPosts = async (request, response) => {
     } catch (error) {
         response.status(500).json(error)
     }
-}
+
+    
+    } 

@@ -14,8 +14,15 @@ const axiosInstance = axios.create({
 //will help in creating common api
 axiosInstance.interceptors.request.use(
     function (config){
+        if (config.TYPE.params) {
+            config.params = config.TYPE.params
+        } else if (config.TYPE.query) {
+            config.url = config.url + '/' + config.TYPE.query;
+        }
         return config;
-    },
+            
+        },
+       
     function(error){
         return Promise.reject(error);
     }
@@ -98,6 +105,7 @@ for(const [key,value] of Object.entries(SERVICE_URLS)){
             headers: {
                 authorization: getAccessToken(),
             }, 
+            TYPE: getType(value, body),
             onUploadProgress: function(progressEvent){
                 if(showUploadProgress){
                     let percentageCompleted =Math.round((progressEvent.loaded*100)/ProgressEvent.total)

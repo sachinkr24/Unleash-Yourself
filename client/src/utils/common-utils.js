@@ -16,6 +16,10 @@ export const setRefreshToken = (refreshToken) => {
     sessionStorage.setItem('refreshToken', `Bearer ${refreshToken}`);
 }
 
+export const addElipsis=(str,limit)=>{
+    return str.length>limit?str.substring(0,limit)+'...':str;
+}
+
 export const getType = (value, body) => {
     if (value.params) {
         return { params: body }
