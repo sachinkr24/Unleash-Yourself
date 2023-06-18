@@ -34,11 +34,11 @@ function App() {
               <Route path='/' element={<Home />} />
              </Route>
 
-      <Route path='/create' element={<PrivateRoute isAuthenticated={isAuthenticated} />} >
+             <Route path='/create' element={<PrivateRoute isAuthenticated={isAuthenticated} />} >
               <Route path='/create' element={<CreatePost />} />
-             </Route>
+            </Route>
 
-      <Route path='/details/:id' element={<PrivateRoute isAuthenticated={isAuthenticated} />} >
+            <Route path='/details/:id' element={<PrivateRoute isAuthenticated={isAuthenticated} />} >
               <Route path='/details/:id' element={<DetailView />} />
             </Route>
       <Route path='/update/:id' element={<PrivateRoute isAuthenticated={isAuthenticated} />} >

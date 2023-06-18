@@ -27,7 +27,7 @@ router.get('/posts', authenticateToken, getAllPosts);
 router.post('/file/upload', upload.single('file'), uploadImage);
 router.get('/file/:filename', getImage);
 router.put('/update/:id', authenticateToken, updatePost ); //updatePost imported
-router.delete('/delete/:id', authenticateToken, deletePost )
+router.delete('/delete/:id', authenticateToken, deletePost );
 
 
 
