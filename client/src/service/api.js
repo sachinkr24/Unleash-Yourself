@@ -1,6 +1,7 @@
 import axios from 'axios'; 
 import{API_NOTIFICATION_MESSAGES} from '../constants/config.js' ;
 import {SERVICE_URLS} from '../constants/config.js' ;
+import { getAccessToken, getRefreshToken, setAccessToken, getType } from '../utils/common-utils';
 const API_URL = 'http://localhost:8000';
 
 const axiosInstance = axios.create({
@@ -12,13 +13,18 @@ const axiosInstance = axios.create({
 })
 //will help in creating common api
 axiosInstance.interceptors.request.use(
-    function (config){
+    function(config) {
+        if (config.TYPE.params) {
+            config.params = config.TYPE.params
+        } else if (config.TYPE.query) {
+            config.url = config.url + '/' + config.TYPE.query;
+        }
         return config;
     },
-    function(error){
+    function(error) {
         return Promise.reject(error);
     }
-)
+);
 
 axiosInstance.interceptors.response.use(
     function(response){
@@ -87,29 +93,31 @@ const processError =(error)=>{
 }
 // for of loop with objects
 const API = {};
-for(const [key,value] of Object.entries(SERVICE_URLS)){
+
+for (const [key, value] of Object.entries(SERVICE_URLS)) {
     API[key] = (body, showUploadProgress, showDownloadProgress) =>
-        axiosInstance({
-            method: value.method,
-            url: value.url,
-            data:body,
-            responseType:value.responseType,
-            onUploadProgress: function(progressEvent){
-                if(showUploadProgress){
-                    let percentageCompleted =Math.round((progressEvent.loaded*100)/ProgressEvent.total)
-                    showUploadProgress(percentageCompleted);
+    axiosInstance({
+        method: value.method,
+        url: value.url,
+        data: value.method === 'DELETE' ? {} : body,
+        responseType: value.responseType,
+        headers: {
+            authorization: getAccessToken(),
+        },
+            TYPE: getType(value, body),
+            onUploadProgress: function(progressEvent) {
+                if (showUploadProgress) {
+                    let percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);
+                    showUploadProgress(percentCompleted);
                 }
             },
-
-            onDownloadProgress: function(progressEvent){
-                if(showDownloadProgress){
-                    let percentageCompleted =Math.round((progressEvent.loaded*100)/ProgressEvent.total)
-                    showDownloadProgress(percentageCompleted);
+            onDownloadProgress: function(progressEvent) {
+                if (showDownloadProgress) {
+                    let percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);
+                    showDownloadProgress(percentCompleted);
                 }
             }
+        });
+}
 
-
-        })
- }
-
- export {API};
+export { API };
