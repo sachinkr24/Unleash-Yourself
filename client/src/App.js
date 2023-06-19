@@ -1,12 +1,8 @@
 // import logo from './logo.svg';
 import './App.css';
 //components
-<<<<<<< HEAD
-import CreatePost from './create/CreatePost';
-=======
 import CreatePost from './components/create/CreatePost';
 import Update from './components/create/Update';
->>>>>>> 6b5dfd9015e0f3fb8b12de1e31100e8dd84cbb32
 import Login from './components/account/Login';
 import DataProvider from './context/DataProvider';
 import Home from './components/home/Home';
@@ -14,7 +10,8 @@ import Header from './components/header/Header';
 import {BrowserRouter, Routes, Route , Outlet , Navigate} from 'react-router-dom';
 import DetailView from './components/details/DetailView';
 import { useState } from 'react';
-
+import About from './components/about/About';
+import Contact from './components/contacts/Contacts';
 
 function App() {
  const PrivateRoute = ({ isAuthenticate ,...props }) =>{
@@ -35,20 +32,6 @@ function App() {
       <div style={{marginTop:64}}>
       <Routes>
 
-<<<<<<< HEAD
-      <Route path = '/login' element={<Login isUserAuthenticated={isUserAuthenticated} /> }/>
-
-      <Route path = '/' element = {<PrivateRoute isAuthenticated ={isAuthenticated} />} >
-        <Route path = '/' element={<Home/>}/>
-      </Route>
-
-      <Route path = '/create' element = {<PrivateRoute isAuthenticated ={isAuthenticated} />} >
-        <Route path = '/create' element={<CreatePost/>}/>
-      </Route>
-
-
-      </Routes>
-=======
       <Route path='/Login' element={<Login isUserAuthenticated={isUserAuthenticated} />} />
       <Route path='/' element={<PrivateRoute isAuthenticated={isAuthenticated} />} >
               <Route path='/' element={<Home />} />
@@ -65,9 +48,16 @@ function App() {
               <Route path='/update/:id' element={<Update />} />
             </Route>
 
+      <Route path='/about' element={<PrivateRoute isAuthenticated={isAuthenticated} />} >
+              <Route path='/about' element={<About />} />
+            </Route>
+
+      <Route path='/contact' element={<PrivateRoute isAuthenticated={isAuthenticated} />} >
+              <Route path='/contact' element={<Contact />} />
+            </Route>
+
             </Routes>
       
->>>>>>> 6b5dfd9015e0f3fb8b12de1e31100e8dd84cbb32
 
       </div>
       </BrowserRouter>
